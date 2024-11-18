@@ -1,8 +1,27 @@
 return {
+
+    {
+        'rebelot/kanagawa.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require('kanagawa').setup {
+                theme = 'dragon',
+            }
+            vim.cmd.colorscheme 'kanagawa'
+        end,
+    },
     'tpope/vim-sleuth',
     {
         'mbbill/undotree',
-        config = function() vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Toggle Undotree' }) end,
+        lazy = true,
+        keys = {
+            {
+                '<leader>u',
+                vim.cmd.UndotreeToggle,
+                desc = 'Toggle Undotree',
+            },
+        },
     },
     {
         'christoomey/vim-tmux-navigator',
@@ -19,14 +38,6 @@ return {
     },
     { 'Bilal2453/luvit-meta' },
     {
-        'catppuccin/nvim',
-        priority = 1000,
-        init = function()
-            vim.cmd.colorscheme 'catppuccin-mocha'
-            --vim.cmd.hi 'Comment gui=none'
-        end,
-    },
-    {
         'folke/todo-comments.nvim',
         event = 'VimEnter',
         dependencies = { 'nvim-lua/plenary.nvim' },
@@ -34,6 +45,9 @@ return {
     },
     {
         'echasnovski/mini.nvim',
+        version = false,
+        lazy = true,
+        event = 'VimEnter',
         config = function()
             -- Better Around/Inside textobjects
             --

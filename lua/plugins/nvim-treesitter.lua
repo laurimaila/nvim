@@ -1,5 +1,6 @@
 return {
     'nvim-treesitter/nvim-treesitter',
+    version = false,
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
     opts = {
@@ -26,5 +27,14 @@ return {
             additional_vim_regex_highlighting = { 'ruby' },
         },
         indent = { enable = true, disable = { 'ruby' } },
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = '<C-space>',
+                node_incremental = '<C-space>',
+                scope_incremental = false,
+                node_decremental = '<bs>',
+            },
+        },
     },
 }

@@ -1,6 +1,6 @@
 return {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
     extensions = { 'oil' },
     config = function()
         local arrow_status = function() return require('arrow.statusline').text_for_statusline_with_icons() end

@@ -18,40 +18,14 @@ return {
                     mode = mode or 'n'
                     vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
                 end
-
-                -- Jump to the definition of the word under your cursor.
-                --  This is where a variable was first declared, or where a function is defined, etc.
-                --  To jump back, press <C-t>.
                 map('gd', require('telescope.builtin').lsp_definitions, 'To definition')
-
-                -- Find references for the word under your cursor.
                 map('gr', require('telescope.builtin').lsp_references, 'To references')
-
-                -- Jump to the implementation of the word under your cursor.
-                --  Useful when your language has ways of declaring types without an actual implementation.
                 map('gI', require('telescope.builtin').lsp_implementations, 'To implementation')
-
-                -- Jump to the type of the word under your cursor.
-                --  Useful when you're not sure what type a variable is and you want to see
-                --  the definition of its *type*, not where it was *defined*.
                 map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'To type definition')
-
-                -- Fuzzy find all the symbols in your current document.
-                --  Symbols are things like variables, functions, types, etc.
                 map('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'Find document symbols')
-
-                -- Fuzzy find all the symbols in your current workspace.
-                --  Similar to document symbols, except searches over your entire project.
                 map('<leader>fs', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Find workspace symbols')
-
-                -- Rename the variable under your cursor.
-                --  Most Language Servers support renaming across files, etc.
                 map('<leader>rn', vim.lsp.buf.rename, 'Rename')
-
-                -- Execute a code action, usually your cursor needs to be on top of an error
-                -- or a suggestion from your LSP for this to activate.
                 map('<leader>ca', vim.lsp.buf.code_action, 'Code action', { 'n', 'x' })
-
                 -- NOTE: Declaration, not definition
                 map('gD', vim.lsp.buf.declaration, 'To declaration')
 
@@ -124,6 +98,16 @@ return {
             gopls = {
                 settings = {
                     gopls = {
+                        codelenses = {
+                            gc_details = false,
+                            generate = true,
+                            regenerate_cgo = true,
+                            run_govulncheck = true,
+                            test = true,
+                            tidy = true,
+                            upgrade_dependency = true,
+                            vendor = true,
+                        },
                         hints = {
                             rangeVariableTypes = true,
                             parameterNames = true,
@@ -133,6 +117,18 @@ return {
                             compositeLiteralTypes = true,
                             functionTypeParameters = true,
                         },
+                        analyses = {
+                            fieldalignment = true,
+                            nilness = true,
+                            unusedparams = true,
+                            unusedwrite = true,
+                            useany = true,
+                        },
+                        usePlaceholders = true,
+                        completeUnimported = true,
+                        staticcheck = true,
+                        directoryFilters = { '-.git', '-.vscode', '-.idea', '-.vscode-test', '-node_modules' },
+                        semanticTokens = true,
                     },
                 },
             },
