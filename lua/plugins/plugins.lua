@@ -1,17 +1,18 @@
 return {
-
     {
-        'rebelot/kanagawa.nvim',
-        lazy = false,
+        'projekt0n/github-nvim-theme',
         priority = 1000,
+        lazy = false,
         config = function()
-            require('kanagawa').setup {
-                theme = 'dragon',
-            }
-            vim.cmd.colorscheme 'kanagawa'
+            require('github-theme').setup()
+            vim.cmd('colorscheme github_dark')
         end,
     },
-    'tpope/vim-sleuth',
+    { 'tpope/vim-sleuth' },
+    {
+        'gbprod/substitute.nvim',
+        opts = {},
+    },
     {
         'mbbill/undotree',
         lazy = true,
@@ -25,7 +26,21 @@ return {
     },
     {
         'christoomey/vim-tmux-navigator',
-        lazy = false,
+        lazy = true,
+        cmd = {
+            'TmuxNavigateLeft',
+            'TmuxNavigateDown',
+            'TmuxNavigateUp',
+            'TmuxNavigateRight',
+            'TmuxNavigatePrevious',
+        },
+        keys = {
+            { '<c-h>', '<cmd><C-U>TmuxNavigateLeft<cr>' },
+            { '<c-j>', '<cmd><C-U>TmuxNavigateDown<cr>' },
+            { '<c-k>', '<cmd><C-U>TmuxNavigateUp<cr>' },
+            { '<c-l>', '<cmd><C-U>TmuxNavigateRight<cr>' },
+            { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
+        },
     },
     {
         'folke/lazydev.nvim',
@@ -55,7 +70,7 @@ return {
             --  - va)  - [V]isually select [A]round [)]paren
             --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
             --  - ci'  - [C]hange [I]nside [']quote
-            require('mini.ai').setup { n_lines = 500 }
+            require('mini.ai').setup({ n_lines = 500 })
 
             -- Add/delete/replace surroundings (brackets, quotes, etc.)
             --

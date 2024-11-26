@@ -1,13 +1,12 @@
 return {
     'neovim/nvim-lspconfig',
+    lazy = true,
+    event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
     dependencies = {
-        { 'williamboman/mason.nvim', config = true },
-        'williamboman/mason-lspconfig.nvim',
-        'WhoIsSethDaniel/mason-tool-installer.nvim',
-
+        { 'williamboman/mason.nvim' },
+        { 'williamboman/mason-lspconfig.nvim' },
         { 'j-hui/fidget.nvim', opts = {} },
-
-        'hrsh7th/cmp-nvim-lsp',
+        { 'hrsh7th/cmp-nvim-lsp' },
     },
     config = function()
         --  This function gets run when an LSP attaches to a particular buffer.
@@ -48,7 +47,7 @@ return {
                         group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
                         callback = function(event2)
                             vim.lsp.buf.clear_references()
-                            vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+                            vim.api.nvim_clear_autocmds({ group = 'kickstart-lsp-highlight', buffer = event2.buf })
                         end,
                     })
                 end
@@ -56,7 +55,7 @@ return {
                 if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
                     map(
                         '<leader>th',
-                        function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end,
+                        function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf })) end,
                         'Toggle inlay hints'
                     )
                 end
@@ -92,6 +91,14 @@ return {
                             includeInlayFunctionLikeReturnTypeHints = true,
                             includeInlayEnumMemberValueHints = true,
                         },
+                    },
+                },
+            },
+            svelte = {
+                keys = {},
+                capabilities = {
+                    workspace = {
+                        didChangeWatchedFiles = vim.fn.has('nvim-0.10') == 0 and { dynamicRegistration = true },
                     },
                 },
             },
@@ -151,19 +158,13 @@ return {
                     },
                 },
             },
+            marksman = {},
+            helm_ls = {},
         }
 
         require('mason').setup()
 
-        -- You can add other tools here that you want Mason to install
-        -- for you, so that they are available from within Neovim.
-        local ensure_installed = vim.tbl_keys(servers or {})
-        vim.list_extend(ensure_installed, {
-            'stylua',
-        })
-        require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-        require('mason-lspconfig').setup {
+        require('mason-lspconfig').setup({
             handlers = {
                 function(server_name)
                     local server = servers[server_name] or {}
@@ -174,6 +175,6 @@ return {
                     require('lspconfig')[server_name].setup(server)
                 end,
             },
-        }
+        })
     end,
 }

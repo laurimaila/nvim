@@ -36,8 +36,10 @@ return {
             },
         },
 
-        -- Document existing key chains
         spec = {
+            { '<BS>', desc = 'Decrement selection', mode = 'x' },
+            { '<c-space>', desc = 'Increment selection', mode = { 'x', 'n' } },
+
             { '<leader>c', group = 'Code', mode = { 'n', 'x' } },
             { '<leader>d', group = 'Document' },
             { '<leader>r', group = 'Rename' },

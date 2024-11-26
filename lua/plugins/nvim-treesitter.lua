@@ -3,11 +3,13 @@ return {
     version = false,
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
+    event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
     opts = {
         ensure_installed = {
             'bash',
             'c',
             'go',
+            'svelte',
             'diff',
             'html',
             'lua',

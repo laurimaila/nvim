@@ -22,6 +22,12 @@ M.setup = function()
     map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
     map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 
+    -- Substitute
+    map('n', 's', require('substitute').operator, { noremap = true, desc = 'Substitute' })
+    map('n', 'ss', require('substitute').line, { noremap = true, desc = 'Substitute line' })
+    map('n', 'S', require('substitute').eol, { noremap = true, desc = 'Substitute eol' })
+    map('x', 's', require('substitute').visual, { noremap = true, desc = 'Substitute visual' })
+
     -- Oil
     map('n', '-', '<CMD>Oil<CR>', { desc = 'Oil: parent directory' })
 

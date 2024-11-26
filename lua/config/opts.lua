@@ -7,11 +7,13 @@ M.setup = function()
     vim.g.have_nerd_font = true
 
     vim.opt.number = true
+    vim.opt.numberwidth = 2
     vim.opt.relativenumber = true
     vim.opt.mouse = 'a'
     vim.opt.showmode = false
-    vim.opt.breakindent = true
+
     vim.opt.undofile = true
+
     vim.opt.ignorecase = true
     vim.opt.smartcase = true
     vim.opt.signcolumn = 'yes'
